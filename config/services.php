@@ -31,9 +31,12 @@ return [
     ],
 
     'firebase' => [
-        'api_key' => 'api_key', // Only used from JS integration
-        'auth_domain' => 'auth_domain', // Only used from JS integration
-        'database_url' => 'https://database_url.com/',
-        'storage_bucket' => '', // Only used from JS integration
+        'apiKey' => "AIzaSyD594kQatzBHyUVVeXycIWx5tVjVoOkrOs",
+        'authDomain' =>  "rncovidsched.firebaseapp.com",
+        'databaseURL' =>  "https://rncovidsched-default-rtdb.firebaseio.com/",
+        'projectId' =>  "rncovidsched",
+        'storageBucket' =>  "rncovidsched.appspot.com",
+        'messagingSenderId' =>  "793794700791",
+        'appId' =>  "1:793794700791:web:522c9072ed133333e6baf2"
     ],
 ];
