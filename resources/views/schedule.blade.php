@@ -89,15 +89,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="vacSiteleFormControlInput" class="form-label">Vaccination Site</label>
-                        <input type="text" name="vacLocation" class="form-control" id="vacSiteleFormControlInput" placeholder="@mmsu" required>
+                        <input type="text" name="vacLocation" class="form-control" id="vacSiteleFormControlInput" placeholder="@Location" required>
                     </div>
                     <div class="mb-3">
                         <label for="brandFormControlInput" class="form-label">Vaccination Brand</label>
-                        <input type="text" name="vacBrand" class="form-control" id="brandFormControlInput" placeholder="name@example.com" required>
+                        <input type="text" name="vacBrand" class="form-control" id="brandFormControlInput" placeholder="@Brand" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput" class="form-label">Slot</label>
-                        <input type="text" name="vacSlot" class="form-control" id="SlotFormControlInput" placeholder="name@example.com" required>
+                        <input type="text" name="vacSlot" class="form-control" id="SlotFormControlInput" placeholder="@1-1000" required>
                     </div>
                 </div>
                 <div class="modal-footer">

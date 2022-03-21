@@ -7,7 +7,7 @@ var firebaseConfig = {
     messagingSenderId: "969104073456",
     appId: "1:969104073456:web:5a843163dbf96cb9fd1835"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 var facebookProvider = new firebase.auth.FacebookAuthProvider();
 var googleProvider = new firebase.auth.GoogleAuthProvider();
 var facebookCallbackLink = '/login/facebook/callback';

@@ -13,10 +13,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <script src="{{ asset('js/firebaseLogin.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/firebaseLogin.js') }}" defer></script>
     <script src="{{ asset('js/firebaseappointment.js') }}" defer></script>
-    <script src="{{ asset('js/firebasepersonInfo.js') }}" defer></script>
-    <script src="{{ asset('js/firebaseschedule.js') }}" defer></script>
+    <script src="{{ asset('js/firebasepersonInfo.js') }}" defer></script> -->
+    <!-- <script src="{{ asset('js/firebase.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -96,7 +96,7 @@
                         @else
                         <li class="nav-item">
                             <div class="row g-2 flex" style="margin:5px 5px">
-                                <img src="{{ URL::asset('../../img/kind.png') }}" alt="profile Pic" style="height:25px; width:25px" class="    img-fluid rounded-start">
+                                <img src="{{ URL::asset('../../img/profile.png') }}" alt="profile Pic" style="height:25px; width:25px" class="    img-fluid rounded-start">
                                 <p class="card-text" style="size: 12;margin-left:10px;margin-top:3px;vertical-align:middle!important;word-wrap:break-word">
                                     <b>Admin</b>
                                 </p>
@@ -132,7 +132,7 @@
                                 <div class="card" style="width: undefined;border-radius: 13px;box-shadow: 0 4px 4px 0 rgba(165, 165, 165, 0.2), 0 6px 20px 0 rgba(145, 145, 145, 0.19);">
                                     <div class="card-body">
                                         <div class="row g-2 flex" style="margin:5px 5px">
-                                            <img src="{{ URL::asset('../../img/kind.png') }}" alt="profile Pic" height="40" width="40" class="img-fluid rounded-start">
+                                            <img src="{{ URL::asset('../../img/list.png') }}" alt="profile Pic" height="40" width="40" class="img-fluid rounded-start">
                                             <p class="card-text" style="size: 12;margin-left:10px;margin-top:8px;vertical-align:middle!important;word-wrap:break-word">
                                                 <b> Appointments</b>
                                             </p>
@@ -146,7 +146,7 @@
                                 <div class="card" style="width: undefined;border-radius: 13px;box-shadow: 0 4px 4px 0 rgba(165, 165, 165, 0.2), 0 6px 20px 0 rgba(145, 145, 145, 0.19);">
                                     <div class="card-body">
                                         <div class="row g-2 flex" style="margin:5px 5px">
-                                            <img src="{{ URL::asset('../../img/kind.png') }}" alt="profile Pic" height="40" width="40" class="img-fluid rounded-start">
+                                            <img src="{{ URL::asset('../../img/personal.png') }}" alt="profile Pic" height="40" width="40" class="img-fluid rounded-start">
                                             <p class="card-text" style="size: 12;margin-left:10px;margin-top:8px;vertical-align:middle!important;word-wrap:break-word">
                                                 <b> Patient Information</b>
                                             </p>
@@ -160,7 +160,7 @@
                                 <div class="card" style="width: undefined;border-radius: 13px;box-shadow: 0 4px 4px 0 rgba(165, 165, 165, 0.2), 0 6px 20px 0 rgba(145, 145, 145, 0.19);">
                                     <div class="card-body">
                                         <div class="row g-2 flex" style="margin:5px 5px">
-                                            <img src="{{ URL::asset('../../img/kind.png') }}" alt="profile Pic" height="40" width="40" class="img-fluid rounded-start">
+                                            <img src="{{ URL::asset('../../img/schedule.png') }}" alt="profile Pic" height="40" width="40" class="img-fluid rounded-start">
                                             <p class="card-text" style="size: 12;margin-left:10px;margin-top:8px;vertical-align:middle!important;word-wrap:break-word">
                                                 <b> Schedule</b>
                                             </p>
