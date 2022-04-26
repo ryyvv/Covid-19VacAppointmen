@@ -25,32 +25,25 @@
                                 Sort By:</p>
                         </div>
                     </div>
-                    <div style="height:360px;overflow-x:hidden;overflow-y:auto;width: 100%">
-                        <table class="table table-sm" style="margin-top:1.5vh;margin-bottom:0;">
+                    <div style="height:360px;overflow:hidden;overflow-y:auto;width: 100%">
+                        <!-- <div class="table-responsive"> -->
+                        <table class=" table table-sm" style="margin-top:1.5vh;margin-bottom:0;">
                             <caption>
                                 <div class="row row-md-12">
                                     <div class="col col-md-6">
                                         <!-- List of Patients -->
                                     </div>
                                     <div class="col col-md-6" style=" display: flex;flex-direction: row-reverse;">
-                                        <!-- <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                    </nav> -->
                                     </div>
                                 </div>
                             </caption>
                             <thead>
                                 <tr>
+                                    <th style="color:#08509c" scope="col">Image</th>
                                     <th style="color:#08509c" scope="col">Date and Time</th>
                                     <th style="color:#08509c" scope="col">Vaccination Site</th>
                                     <th style="color:#08509c" scope="col">Vaccination Brand</th>
+                                    <th style="color:#08509c" scope="col">Status</th>
                                     <th style="color:#08509c" scope="col">Available Slot</th>
                                     <th style="color:#08509c;text-align:center" colspan="2">Action</th>
                                 </tr>
@@ -62,7 +55,7 @@
                     </div>
                     <div class="row">
                         <div class="card-body">
-                            List of Patients
+                            List of Vaccines
                         </div>
                     </div>
                 </div>
@@ -83,6 +76,10 @@
                     </button>
                 </div>
                 <div class="modal-body" id="createBody">
+                    <!-- <div class="mb-3">
+                        <label for="imageFormControlInput" class="form-label">Upload image</label>
+                        <input type="file" name="imageURL" id="images" class="form-control" accept="image/x-png,image/jpeg" placeholder="@image" required />
+                    </div> -->
                     <div class="mb-3">
                         <label for="dateFormControlInput" class="form-label">Date</label>
                         <input type="date" name="date" class="form-control" id="dateFormControlInput" placeholder="@date" required>
@@ -94,6 +91,10 @@
                     <div class="mb-3">
                         <label for="brandFormControlInput" class="form-label">Vaccination Brand</label>
                         <input type="text" name="vacBrand" class="form-control" id="brandFormControlInput" placeholder="@Brand" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="brandFormControlInput" class="form-label">Guardian(Stat)</label>
+                        <input type="text" name="guardianstat" class="form-control" id="brandFormControlInput" placeholder="@stat" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput" class="form-label">Slot</label>
@@ -218,20 +219,21 @@
         appId: "1:793794700791:web:522c9072ed133333e6baf2"
     });
     var db = firebase.firestore();
+    // var firestorage = firebase.storage().ref();
 
     function sorts() {
 
         var select = document.getElementById('sort').value;
         if (select == "asc") {
             $('#schedtbody').html('');
-            db.collection('VacSched').orderBy('date', 'asc').get().then((snapshot) => {
+            db.collection('VacSched').orderBy('vacdate', 'asc').get().then((snapshot) => {
                 snapshot.docs.forEach(doc => {
                     renderDataPer(doc)
                 })
             });
         } else {
             $('#schedtbody').html('');
-            db.collection('VacSched').orderBy('date', 'desc').get().then((snapshot) => {
+            db.collection('VacSched').orderBy('vacdate', 'desc').get().then((snapshot) => {
                 snapshot.docs.forEach(doc => {
                     renderDataPer(doc)
                 })
@@ -241,12 +243,14 @@
 
 
     // Get Data
-    db.collection('VacSched').orderBy('date', 'asc').get().then((snapshot) => {
+    db.collection('VacSched').orderBy('vacdate', 'asc').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             renderDataPer(doc)
         })
     });
 
+
+    // firestorage.ref(imageURL).get()
 
     // Appenddata to table
     const schedInfo = document.querySelector('#schedtbody');
@@ -254,9 +258,12 @@
     //render
     function renderDataPer(doc) {
         let tr = document.createElement('tr');
-        let date = document.createElement('td');
+        // let vacimage = document.createElement('td');
+        // let image = document.createElement('img');
+        let vacdate = document.createElement('td');
         let vacLocation = document.createElement('td');
         let vacBrand = document.createElement('td');
+        let guardianstat = document.createElement('td');
         let vacSlot = document.createElement('td');
         let edit = document.createElement('td');
         let del = document.createElement('td');
@@ -274,10 +281,14 @@
         });
         doc.data.date = dtes;
         tr.setAttribute('data-id', doc.id);
-        date.textContent = dtes + ", 8-5PM";
+        // image.setAttribute('src', doc.data().imageURL);
+        // image.setAttribute('style', 'width: 100px');
+        // image.setAttribute('alt', 'Thumbnail');
+        vacdate.textContent = dtes + ", 8-5PM";
         vacLocation.textContent = doc.data().vacLocation;
         vacBrand.textContent = doc.data().vacBrand;
         vacSlot.textContent = doc.data().vacSlot;
+        guardianstat.textContent = doc.data().guardianstat;
         btnedit.setAttribute('data-id', doc.id);
         iconEdit.setAttribute('name', 'create-outline');
         iconDel.setAttribute('name', 'trash-outline');
@@ -292,9 +303,12 @@
         btndel.setAttribute('data-target', '#remove-modal');
         btndel.setAttribute('class', 'btn btn-outline-danger removeData');
 
-        tr.appendChild(date);
+        // tr.appendChild(vacimage);
+        // vacimage.appendChild(image);
+        tr.appendChild(vacdate);
         tr.appendChild(vacLocation);
         tr.appendChild(vacBrand);
+        tr.appendChild(guardianstat);
         tr.appendChild(vacSlot);
         btnedit.appendChild(iconEdit);
         btndel.appendChild(iconDel);
@@ -314,17 +328,32 @@
     const addsched = document.querySelector('#add');
     addsched.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        // var x = document.createElement("images");
+        // x.setAttribute("type", "image");
+        // console.log(x)
+
         var values = $("#add").serializeArray();
         console.log(values)
-        var date = values[0].value;
+        var vacdate = values[0].value;
         var vacLocation = values[1].value;
         var vacBrand = values[2].value;
-        var vacSlot = values[3].value;
+        var guardianstat = values[3].value;
+        var vacSlot = values[4].value;
+
+        // var imageURL = values[0].val();
+        // var vacdate = values[1].value;
+        // var vacLocation = values[2].value;
+        // var vacBrand = values[3].value;
+        // var vacSlot = values[4].value;
+
 
         db.collection('VacSched').add({
-            date: date,
+            imageURL: 'image',
+            vacdate: vacdate,
             vacLocation: vacLocation,
             vacBrand: vacBrand,
+            guardianstat: guardianstat,
             vacSlot: vacSlot
         }).then((docs) => {
             aMes()
@@ -405,7 +434,7 @@
         datelabel.setAttribute('class', 'form-label');
         datelabel.textContent = 'Date';
         dateinput.setAttribute('type', 'date');
-        dateinput.setAttribute('name', 'date');
+        dateinput.setAttribute('name', 'vacdate');
         dateinput.setAttribute('class', 'form-control');
         dateinput.setAttribute('id', 'dateFormControlInput');
         dateinput.setAttribute('value', doc.date);
@@ -458,7 +487,6 @@
     }
 
     function reloads() {
-        // location.reload()
         setTimeout("location.reload(true);", 1);
     }
 
@@ -467,15 +495,17 @@
         e.preventDefault();
         var values2 = $("#updatesss").serializeArray();
         var hidden = values2[0].value;
-        var dates = values2[1].value;
+        var vacdates = values2[1].value;
         var location = values2[2].value;
         var brand = values2[3].value;
-        var slot = values2[4].value;
+        var guardianstat = values2[4].value;
+        var slot = values2[5].value;
 
         db.collection('VacSched').doc(hidden).set({
-            date: dates,
+            vacdate: vacdates,
             vacLocation: location,
             vacBrand: brand,
+            guardianstat: guardian,
             vacSlot: slot
         }).then((docs) => {
             eMes()

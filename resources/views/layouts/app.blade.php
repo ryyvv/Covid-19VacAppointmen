@@ -8,7 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Covid-19 Vaccine Appointment') }}</title>
+    <title>
+
+        {{ config('app.name', 'Covid-19 Vaccine Appointment') }}
+    </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -64,7 +67,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/appointment') }}">
+                <img src="{{ URL::asset('../../img/calendar.png') }}" alt="profile Pic" style="height:35px; width:35px" class="    img-fluid rounded-start">
+                <a class="navbar-brand" style="margin-left:10px" href="{{ url('/appointment') }}">
                     <b>{{ config('app.name', 'Covid-19 Vaccine Appointments') }}</b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

@@ -60,8 +60,8 @@
                                     <th style="color:#08509c" scope="col">Vaccination Site</th>
                                     <th style="color:#08509c" scope="col">Appointment Code</th>
                                     <th style="color:#08509c" scope="col">Status</th>
-                                    {{-- <th style="color:#08509c;text-align: center" colspan="2">Action</th> --}}
-                                    {{-- <th style="color:#08509c" scope="col">Delete</th> --}}
+                                    <!-- <th style="color:#08509c;text-align: center" colspan="2">Action</th>
+                                    <th style="color:#08509c" scope="col">Delete</th> -->
                                 </tr>
                             </thead>
                             <tbody id="apptbodby">
@@ -98,27 +98,6 @@
     });
     var db = firebase.firestore();
 
-    // function sorts() {
-
-    //     var select = document.getElementById('sort').value;
-    //     if (select == "asc") {
-    //         $('#apptbodby').html('');
-    //         db.collection('Users').orderBy('date', 'asc').get().then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 renderDataPer(doc)
-    //             })
-    //         })
-    //     } else {
-    //         $('#apptbodby').html('');
-    //         db.collection('Users').orderBy('date', 'desc').get().then((snapshot) => {
-    //             snapshot.docs.forEach(doc => {
-    //                 renderDataPer(doc)
-    //             })
-    //         })
-    //     }
-    // }
-
-
     // Get Data
     db.collection('Users').orderBy('firstname', 'asc').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
@@ -146,8 +125,8 @@
         });
         doc.data.date = dtes;
         date.textContent = dtes + ", 8-5PM";
-        Location.textContent = doc.id;
-        appCode.textContent = doc.data().Location;
+        Location.textContent = doc.data().vaclocation;
+        appCode.textContent = doc.id;
         status.textContent = doc.data().status;
 
         tr.appendChild(Patient);

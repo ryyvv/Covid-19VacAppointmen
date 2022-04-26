@@ -149,7 +149,7 @@
         barangay.textContent = doc.data().barangay;
         municipality.textContent = doc.data().municipality;
         region.textContent = doc.data().region;
-        contactno.textContent = doc.data().contactno;
+        contactno.textContent = doc.data().contact;
 
         tr.appendChild(firstname);
         tr.appendChild(lastname);

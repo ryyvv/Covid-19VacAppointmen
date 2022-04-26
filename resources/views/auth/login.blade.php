@@ -7,7 +7,12 @@
             <div class="form-group row justify-content-center">
                 <div class="col-md-12">
                     <div class="row justify-content-center">
-                        <h2>Covid-19 Vaccine Appointments</h2>
+                        <img src=" {{ URL::asset('../../img/profile.png') }}" alt="profile Pic" style="height:125px; width:125px" class="    img-fluid rounded-start">
+
+                    </div>
+                    <div class="row justify-content-center">
+                        <h2>Admin</h2>
+                        <!-- <h2>Covid-19 Vaccine Appointments</h2> -->
                     </div>
                 </div>
             </div>
@@ -73,12 +78,14 @@
     <script>
         // Initialize Firebase
         var firebaseConfig = {
-            apiKey: "AIzaSyCoROKp7nbcXqPP0YtA4fO3sPiVYVyi9pI",
-            authDomain: "laravel-auth-9a60c.firebaseapp.com",
-            projectId: "laravel-auth-9a60c",
-            storageBucket: "laravel-auth-9a60c.appspot.com",
-            messagingSenderId: "969104073456",
-            appId: "1:969104073456:web:5a843163dbf96cb9fd1835"
+            apiKey: "AIzaSyD594kQatzBHyUVVeXycIWx5tVjVoOkrOs",
+            authDomain: "rncovidsched.firebaseapp.com",
+            databaseURL: "https://rncovidsched-default-rtdb.firebaseio.com",
+            projectId: "rncovidsched",
+            storageBucket: "rncovidsched.appspot.com",
+            messagingSenderId: "793794700791",
+            appId: "1:793794700791:web:522c9072ed133333e6baf2"
+
         };
         firebase.initializeApp(firebaseConfig);
         var facebookProvider = new firebase.auth.FacebookAuthProvider();
