@@ -28,36 +28,30 @@
                                 Sort By:</p>
                         </div>
                     </div>
-                    <div style="height:360px;overflow-x:hidden;overflow-y:auto;width: 100%">
+                    <div style="height:360px;overflow-x:auto;overflow-y:auto;width: 100%">
                         <table class="table table-sm" style="margin-top:1.5vh;margin-bottom:0;">
                             <caption>
                                 <div class="row row-md-12">
                                     <div class="col col-md-6">
-                                        <!-- List of Patients -->
                                     </div>
                                     <div class="col col-md-6" style=" display: flex;flex-direction: row-reverse;">
-                                        <!-- <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                    </nav> -->
                                     </div>
                                 </div>
                             </caption>
                             <thead>
-                                <tr>
+                                <tr style="z-index: 5;top: 0; position: sticky;width: 100%!important;height: 8px; background-color:white">
                                     <th style="color:#08509c" scope="col">Firstname</th>
                                     <th style="color:#08509c" scope="col">Lastname</th>
                                     <th style="color:#08509c" scope="col">Middlename</th>
-                                    <th style="color:#08509c" scope="col">Address</th>
+                                    <th style="color:#08509c" scope="col">Birthday</th>
+                                    <th style="color:#08509c" scope="col">Gender</th>
+                                    <th style="color:#08509c" scope="col">Barangay</th>
                                     <th style="color:#08509c" scope="col">Municipality</th>
+                                    <th style="color:#08509c" scope="col">Province</th>
                                     <th style="color:#08509c" scope="col">Region</th>
-                                    <th style="color:#08509c" scope="col">Contac No.</th>
+                                    <th style="color:#08509c" scope="col">Email</th>
+                                    <th style="color:#08509c" scope="col">Contact No.</th>
+                                    <th style="color:#08509c" scope="col">Category</th>
                                 </tr>
                             </thead>
                             <tbody id="pertbody">
@@ -137,27 +131,43 @@
         let firstname = document.createElement('td');
         let lastname = document.createElement('td');
         let middlename = document.createElement('td');
+        let birthday = document.createElement('td');
+        let gender = document.createElement('td');
         let barangay = document.createElement('td');
         let municipality = document.createElement('td');
+        let province = document.createElement('td');
         let region = document.createElement('td');
+        let email = document.createElement('td');
         let contactno = document.createElement('td');
+        let category = document.createElement('td');
 
         tr.setAttribute('data-id', doc.id);
         firstname.textContent = doc.data().firstname;
         lastname.textContent = doc.data().lastname;
         middlename.textContent = doc.data().middlename;
+        var ndate = doc.data().birthdate;
+        birthday.textContent = ndate.toDate().toDateString();
+        gender.textContent = doc.data().gender;
         barangay.textContent = doc.data().barangay;
         municipality.textContent = doc.data().municipality;
+        province.textContent = doc.data().province;
         region.textContent = doc.data().region;
+        email.textContent = doc.data().email;
         contactno.textContent = doc.data().contact;
+        category.textContent = doc.data().category;
 
         tr.appendChild(firstname);
         tr.appendChild(lastname);
         tr.appendChild(middlename);
+        tr.appendChild(birthday);
+        tr.appendChild(gender);
         tr.appendChild(barangay);
         tr.appendChild(municipality);
+        tr.appendChild(province);
         tr.appendChild(region);
+        tr.appendChild(email);
         tr.appendChild(contactno);
+        tr.appendChild(category);
 
         personinfo.appendChild(tr);
     }

@@ -39,7 +39,7 @@
                             </caption>
                             <thead>
                                 <tr>
-                                    <th style="color:#08509c" scope="col">Image</th>
+                                    <!-- <th style="color:#08509c" scope="col">Image</th> -->
                                     <th style="color:#08509c" scope="col">Date and Time</th>
                                     <th style="color:#08509c" scope="col">Vaccination Site</th>
                                     <th style="color:#08509c" scope="col">Vaccination Brand</th>
