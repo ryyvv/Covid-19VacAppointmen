@@ -459,7 +459,7 @@
         imagesinput.setAttribute('id', 'images');
         imagesinput.setAttribute('type', 'file');
         imagesinput.setAttribute('name', 'image');
-        imagesinput.setAttribute('placeholder', 'Change');
+        imagesinput.setAttribute('placeholder', doc.imageURL);
         imagesinput.setAttribute('class', 'form-control');
         imagesinput.setAttribute('id', 'imageFormControlInput');
         imagesinput.setAttribute('value', doc.imageURL);
@@ -541,7 +541,7 @@
         var guardianstat = values2[4].value;
         var slot = values2[5].value;
 
-        const file = document.querySelector('#images').files[0]
+        const file = document.querySelector('#imageFormControlInput').files[0]
         const name = file.name;
         const metadata = {
             contentType: file.type
