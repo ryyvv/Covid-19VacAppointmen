@@ -283,16 +283,12 @@
         let iconDel = document.createElement('ion-icon');
 
 
-        let dtes = new Date().toLocaleDateString('en-us', {
-            day: "numeric",
-            month: "short"
-        });
-        doc.data.date = dtes;
+        // let dtes = doc.data().vacdate.toDate().toDateString();
         tr.setAttribute('data-id', doc.id);
         image.setAttribute('src', doc.data().imageURL);
         image.setAttribute('style', 'width: 100px');
         image.setAttribute('alt', 'Thumbnail');
-        vacdate.textContent = dtes + ", 8-5PM";
+        vacdate.textContent = doc.data().vacdate + ", 8-5PM";
         vacLocation.textContent = doc.data().vacLocation;
         vacBrand.textContent = doc.data().vacBrand;
         vacSlot.textContent = doc.data().vacSlot;
@@ -358,10 +354,6 @@
                 // Calls the `getDownloadURL()` method.
                 snapshot.ref.getDownloadURL()
                     .then((url) => {
-                        // Returns the Download URL from Firebase Storage.
-                        console.log('Url')
-                        console.log(url)
-
                         // You can put this either here or before getting download URL.
                         db.collection('VacSched').add({
                             imageURL: url,
@@ -369,7 +361,8 @@
                             vacLocation: vacLocation,
                             vacBrand: vacBrand,
                             guardianstat: guardianstat,
-                            vacSlot: vacSlot
+                            vacSlot: vacSlot,
+                            imageName: name,
                         }).then(() => {
                             console.log('Success')
 
@@ -434,7 +427,9 @@
         let div3 = document.createElement('div');
         let div4 = document.createElement('div');
         let div5 = document.createElement('div');
-        let input = document.createElement('input');
+        let div6 = document.createElement('div');
+        let input1 = document.createElement('input');
+        let input2 = document.createElement('input');
         let imageslabel = document.createElement('label');
         let imagesinput = document.createElement('input');
         let datelabel = document.createElement('label');
@@ -443,6 +438,8 @@
         let vacLocationinput = document.createElement('input');
         let vacBrandlabel = document.createElement('label');
         let vacBrandinput = document.createElement('input');
+        let vacguardianlabel = document.createElement('label');
+        let vacguardianinput = document.createElement('input');
         let vacSlotlabel = document.createElement('label');
         let vacSlotinput = document.createElement('input');
 
@@ -452,10 +449,21 @@
         div3.setAttribute('class', 'mb-3');
         div4.setAttribute('class', 'mb-3');
         div5.setAttribute('class', 'mb-3');
+        div6.setAttribute('class', 'mb-3');
+
+
+        input1.setAttribute('value', ID);
+        input1.setAttribute('type', 'hidden');
+        input1.setAttribute('name', 'hidden1');
+
+        input2.setAttribute('value', doc.imageURL);
+        input2.setAttribute('type', 'hidden');
+        input2.setAttribute('name', 'hidden2');
 
         imageslabel.setAttribute('for', ' imageFormControlInput');
         imageslabel.setAttribute('class', 'form-label');
         imageslabel.textContent = 'Image';
+        imagesinput.setAttribute('required', '');
         imagesinput.setAttribute('id', 'images');
         imagesinput.setAttribute('type', 'file');
         imagesinput.setAttribute('name', 'image');
@@ -464,10 +472,8 @@
         imagesinput.setAttribute('id', 'imageFormControlInput');
         imagesinput.setAttribute('value', doc.imageURL);
 
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('value', ID);
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', 'hidden');
+
+
         datelabel.setAttribute('for', ' dateFormControlInput');
         datelabel.setAttribute('class', 'form-label');
         datelabel.textContent = 'Date';
@@ -495,6 +501,15 @@
         vacBrandinput.setAttribute('id', 'brandFormControlInput');
         vacBrandinput.setAttribute('value', doc.vacBrand);
 
+        vacguardianlabel.setAttribute('for', ' guardianFormControlInput');
+        vacguardianlabel.setAttribute('class', 'form-label');
+        vacguardianlabel.textContent = 'Guardian(stat)';
+        vacguardianinput.setAttribute('type', 'text');
+        vacguardianinput.setAttribute('name', 'guardianstat');
+        vacguardianinput.setAttribute('class', 'form-control');
+        vacguardianinput.setAttribute('id', 'guardianFormControlInput');
+        vacguardianinput.setAttribute('value', doc.guardianstat);
+
         vacSlotlabel.setAttribute('for', ' SlotFormControlInput');
         vacSlotlabel.setAttribute('class', 'form-label');
         vacSlotlabel.textContent = 'Slot';
@@ -512,15 +527,19 @@
         div3.appendChild(vacLocationinput);
         div4.appendChild(vacBrandlabel);
         div4.appendChild(vacBrandinput);
-        div5.appendChild(vacSlotlabel);
-        div5.appendChild(vacSlotinput);
+        div5.appendChild(vacguardianlabel);
+        div5.appendChild(vacguardianinput);
+        div6.appendChild(vacSlotlabel);
+        div6.appendChild(vacSlotinput);
 
-        div.appendChild(input);
+        div.appendChild(input1);
+        div.appendChild(input2);
         div.appendChild(div12);
         div.appendChild(div2);
         div.appendChild(div3);
         div.appendChild(div4);
         div.appendChild(div5);
+        div.appendChild(div6);
 
 
         schedUpdate.appendChild(div);
@@ -533,57 +552,47 @@
     const upsched = document.querySelector('#submitupdate');
     upsched.addEventListener('click', (e) => {
         e.preventDefault();
-        var values2 = $("#updatesss").serializeArray();
-        var hidden = values2[0].value;
-        var vacdates = values2[1].value;
-        var location = values2[2].value;
-        var brand = values2[3].value;
-        var guardianstat = values2[4].value;
-        var slot = values2[5].value;
+        var values = $("#updatesss").serializeArray();
+        var hidden1 = values[0].value;
+        var hidden2 = values[1].value;
+        var vacdate = values[2].value;
+        var location = values[3].value;
+        var brand = values[4].value;
+        var guardianstat = values[5].value;
+        var vacSlot = values[6].value;
 
-        const file = document.querySelector('#imageFormControlInput').files[0]
-        const name = file.name;
+        const file = document.querySelector('#imageFormControlInput').files[0];
+        const name = document.querySelector('#imageFormControlInput').name;
         const metadata = {
-            contentType: file.type
+            contentType: document.querySelector('#imageFormControlInput').type
         };
-        const task = storageRef.child(name).put(file, metadata);
-
+        const task = storageRef.child(name).put(file);
         task.then((snapshot) => {
-                console.log('Img')
                 snapshot.ref.getDownloadURL()
                     .then((url) => {
-                        db.collection('VacSched').set({
+                        db.collection('VacSched').doc(hidden1).set({
                             imageURL: url,
                             vacdate: vacdate,
-                            vacLocation: vacLocation,
-                            vacBrand: vacBrand,
+                            vacLocation: location,
+                            vacBrand: brand,
                             guardianstat: guardianstat,
-                            vacSlot: vacSlot
+                            vacSlot: vacSlot,
+                            imageName: hidden2,
                         }).then(() => {
                             console.log('Success')
 
                         }).catch((error) => {
                             console.error(error)
                         })
-                        aMes()
+                        eMes()
                         location.reload()
+
                     })
             })
             .catch((error) => {
-                // Logs error if there's an error uploading of file.
                 console.log(error)
             })
-        // db.collection('VacSched').doc(hidden).set({
-        //     vacdate: vacdates,
-        //     vacLocation: location,
-        //     vacBrand: brand,
-        //     guardianstat: guardian,
-        //     vacSlot: slot
-        // }).then((docs) => {
-        //     eMes()
-        //     reloads()
-        //     console.log('ID:', hidden)
-        // })
+
 
     })
 

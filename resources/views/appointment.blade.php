@@ -87,12 +87,8 @@
         tr.setAttribute('data-id', doc.id);
         Patient.textContent = doc.data().firstname + '  ' + doc.data().middlename + '  ' + doc.data().lastname;
         email.textContent = doc.data().email;
-        let dtes = new Date().toLocaleDateString('en-us', {
-            day: "numeric",
-            month: "short"
-        });
-        doc.data.date = dtes;
-        date.textContent = dtes + ", 8-5PM";
+        var ndate = doc.data().vacdate;
+        date.textContent = ndate;
         Location.textContent = doc.data().vaclocation;
         appCode.textContent = doc.id;
         status.textContent = doc.data().status;
