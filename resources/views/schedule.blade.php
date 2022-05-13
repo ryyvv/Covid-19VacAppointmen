@@ -90,12 +90,33 @@
                     </div>
                     <div class="mb-3">
                         <label for="brandFormControlInput" class="form-label">Vaccination Brand</label>
-                        <input type="text" name="vacBrand" class="form-control" id="brandFormControlInput" placeholder="@Brand" required>
+                        <select name="vacBrand" class="form-control" aria-label="Select vaccine brand" required>
+                            <option selected>-- Select --</option>
+                            <option value="AstraZeneca">AstraZeneca</option>
+                            <option value="J&J">J&J</option>
+                            <option value="Moderna">Moderna</option>
+                            <option value="Pfizer">Pfizer</option>
+                            <option value="Sinovac">Sinovac</option>
+                            <option value="Sputnik">Sputnik</option>
+                        </select>
                     </div>
+                    <!-- <div class="mb-3">
+                        <label for="brandFormControlInput" class="form-label">Vaccination Brand</label>
+                        <input type="text" name="vacBrand" class="form-control" id="brandFormControlInput" placeholder="@Brand" required>
+                    </div> -->
                     <div class="mb-3">
+                        <label for="brandFormControlInput" class="form-label">Vaccination Brand</label>
+                        <select name="guardianstat" class="form-control" aria-label="Select vaccine brand" required>
+                            <option selected>-- Select --</option>
+                            <option value="18 years old above">18 years old above</option>
+                            <option value="18 years old below">18 years old below</option>
+                        </select>
+                    </div>
+                    <!-- <div class="mb-3">
                         <label for="brandFormControlInput" class="form-label">Guardian(Stat)</label>
                         <input type="text" name="guardianstat" class="form-control" id="brandFormControlInput" placeholder="@stat" required>
-                    </div>
+                    </div> -->
+
                     <div class="mb-3">
                         <label for="exampleFormControlInput" class="form-label">Slot</label>
                         <input type="text" name="vacSlot" class="form-control" id="SlotFormControlInput" placeholder="@1-1000" required>
@@ -437,9 +458,21 @@
         let vacLocationlabel = document.createElement('label');
         let vacLocationinput = document.createElement('input');
         let vacBrandlabel = document.createElement('label');
-        let vacBrandinput = document.createElement('input');
+        let selectbrand = document.createElement('select');
+        let brandopt = document.createElement('option');
+        let AstraZeneca = document.createElement('option');
+        var JnJ = document.createElement('option');
+        let Moderna = document.createElement('option');
+        let Pfizer = document.createElement('option');
+        let Sinovac = document.createElement('option');
+        let Sputnik = document.createElement('option');
+        // let vacBrandinput = document.createElement('input');
         let vacguardianlabel = document.createElement('label');
-        let vacguardianinput = document.createElement('input');
+        let selectguard = document.createElement('select');
+        let guardopt = document.createElement('option');
+        let guardopt1 = document.createElement('option');
+        let guardopt2 = document.createElement('option');
+        // let vacguardianinput = document.createElement('input');
         let vacSlotlabel = document.createElement('label');
         let vacSlotinput = document.createElement('input');
 
@@ -495,20 +528,69 @@
         vacBrandlabel.setAttribute('for', ' brandFormControlInput');
         vacBrandlabel.setAttribute('class', 'form-label');
         vacBrandlabel.textContent = 'Vaccination Brand';
-        vacBrandinput.setAttribute('type', 'text');
-        vacBrandinput.setAttribute('name', 'vacBrand');
-        vacBrandinput.setAttribute('class', 'form-control');
-        vacBrandinput.setAttribute('id', 'brandFormControlInput');
-        vacBrandinput.setAttribute('value', doc.vacBrand);
+        selectbrand.setAttribute('type', 'text');
+        selectbrand.setAttribute('name', 'vacBrand');
+        selectbrand.setAttribute('class', 'form-control');
+        selectbrand.setAttribute('id', 'brandFormControlInput');
+        selectbrand.setAttribute('value', doc.vacBrand);
+        brandopt.textContent = '-- Select --';
+        AstraZeneca.textContent = 'AstraZeneca';
+        AstraZeneca.setAttribute('value', 'AstraZeneca');
+        JnJ.textContent = 'J&J';
+        JnJ.setAttribute('value', 'JnJ');
+        Moderna.textContent = 'Moderna';
+        Moderna.setAttribute('value', 'Moderna');
+        Pfizer.textContent = 'Pfizer';
+        Pfizer.setAttribute('value', 'Pfizer');
+        Sinovac.textContent = 'Sinovac';
+        Sinovac.setAttribute('value', 'Sinovac');
+        Sputnik.textContent = 'Sputnik';
+        Sputnik.setAttribute('value', 'Sputnik');
+
+        if ('AstraZeneca' == doc.vacBrand) {
+            AstraZeneca.setAttribute('selected', 'selected');
+        } else if ('JnJ' == doc.vacBrand) {
+            JnJ.setAttribute('selected', 'selected');
+        } else if ('Moderna' == doc.vacBrand) {
+            Moderna.setAttribute('selected', 'selected');
+        } else if ('Pfizer' == doc.vacBrand) {
+            Pfizer.setAttribute('selected', 'selected');
+        } else if ('Sinovac' == doc.vacBrand) {
+            Sinovac.setAttribute('selected', 'selected');
+        } else if ('Sputnik' == doc.vacBrand) {
+            Sputnik.setAttribute('selected', 'selected');
+        } else {
+            brandopt.textContent = '-- Select --';
+        }
+
+        selectbrand.add(brandopt)
+        selectbrand.add(AstraZeneca)
+        selectbrand.add(JnJ)
+        selectbrand.add(Moderna)
+        selectbrand.add(Pfizer)
+        selectbrand.add(Sinovac)
+        selectbrand.add(Sputnik)
 
         vacguardianlabel.setAttribute('for', ' guardianFormControlInput');
         vacguardianlabel.setAttribute('class', 'form-label');
-        vacguardianlabel.textContent = 'Guardian(stat)';
-        vacguardianinput.setAttribute('type', 'text');
-        vacguardianinput.setAttribute('name', 'guardianstat');
-        vacguardianinput.setAttribute('class', 'form-control');
-        vacguardianinput.setAttribute('id', 'guardianFormControlInput');
-        vacguardianinput.setAttribute('value', doc.guardianstat);
+        vacguardianlabel.textContent = 'Age Range';
+        selectguard.setAttribute('name', 'guardianstat');
+        selectguard.setAttribute('class', 'form-control');
+        selectguard.setAttribute('id', 'guardianFormControlInput');
+        selectguard.setAttribute('selected', doc.guardianstat);
+        guardopt.textContent = '-- Select --';
+        guardopt1.textContent = '18 years old above';
+        guardopt1.setAttribute('value', '18 years old above');
+        guardopt2.textContent = '18 years old below';
+        guardopt2.setAttribute('value', '18 years old below');
+        if ('18 years old above' == doc.guardianstat) {
+            guardopt1.setAttribute('selected', 'selected');
+        } else {
+            guardopt2.setAttribute('selected', 'selected');
+        }
+        selectguard.add(guardopt)
+        selectguard.add(guardopt1)
+        selectguard.add(guardopt2)
 
         vacSlotlabel.setAttribute('for', ' SlotFormControlInput');
         vacSlotlabel.setAttribute('class', 'form-label');
@@ -526,9 +608,9 @@
         div3.appendChild(vacLocationlabel);
         div3.appendChild(vacLocationinput);
         div4.appendChild(vacBrandlabel);
-        div4.appendChild(vacBrandinput);
+        div4.appendChild(selectbrand);
         div5.appendChild(vacguardianlabel);
-        div5.appendChild(vacguardianinput);
+        div5.appendChild(selectguard);
         div6.appendChild(vacSlotlabel);
         div6.appendChild(vacSlotinput);
 

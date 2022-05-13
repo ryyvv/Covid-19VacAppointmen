@@ -31,7 +31,7 @@ class AppointmentController extends Controller
         try {
             $uid = Session::get('uid');
             $user = app('firebase.auth')->getUser($uid);
-            return view('appointment');
+            return view('appointmentView');
         } catch (\Exception $e) {
             return $e;
         }
